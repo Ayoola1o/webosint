@@ -7,18 +7,22 @@ import {RemediationTips} from '../components/RemediationTips';
 import {DarkWebScan} from '../components/DarkWebScan';
 //import PremiumBanner from '../components/PremiumBanner';
 //import PasswordManagerAd from '../components/PasswordManagerAd';
-import {useBreachCheck} from '../hooks/useBreachCheck';
+import useBreachCheck from '../hooks/useBreachCheck';
+
+
 
 export default function Home() {
   const [inputType, setInputType] = useState<'email' | 'username' | 'phone'>('email');
   const { checkBreach, result, loading, error } = useBreachCheck();
 
   // Determine breach type for remediation tips
-  const breachType = result?.breaches?.some(b => b.includes('Password')) 
+  const breachType = result?.breaches?.some((b) => b.includes('Password')) 
     ? 'password' 
     : 'email';
 
   return (
+
+    
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       {/* Header */}
       <div className="max-w-3xl mx-auto text-center mb-12">
@@ -49,7 +53,7 @@ export default function Home() {
         </div>
 
         <SearchInput 
-          placeholder={`Enter your ${inputType}`} 
+          inputType={inputType}
           onSearch={checkBreach} 
         />
 
@@ -69,8 +73,8 @@ export default function Home() {
         {result && (
           <>
             <ResultCard 
-              breachCount={result.breaches?.length || 0} 
-              sources={result.breaches || []} 
+              breachCount={result?.breaches?.length || 0} 
+              sources={result?.breaches || []} 
             />
             
             <div className="grid md:grid-cols-2 gap-6">
@@ -81,10 +85,10 @@ export default function Home() {
         )}
 
         {/* Premium Upsell */}
-        {!result && <PremiumBanner />}
+        {!result && <div className="premium-banner">Upgrade to Premium for more features!</div>}
 
         {/* Security Recommendations */}
-        <PasswordManagerAd />
+        <div className="password-manager-ad">Try our Password Manager for better security!</div>
       </div>
 
       {/* Privacy Notice */}

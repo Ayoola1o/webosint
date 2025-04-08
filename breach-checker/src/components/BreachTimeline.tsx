@@ -13,9 +13,9 @@ export default function BreachTimeline({ breaches }: BreachTimelineProps) {
     labels: breaches.map(d => d.toLocaleDateString()),
     datasets: [{
       label: 'Breach Events',
-      data: breaches.map(() => 1),
-      borderColor: 'rgb(239, 68, 68)',
-      backgroundColor: 'rgba(239, 68, 68, 0.5)',
+      data: breaches.map(() => 0.2),
+      borderColor: 'rgb(68, 128, 239)',
+      backgroundColor: 'rgba(233, 58, 27, 0.5)',
       tension: 0.1,
       pointRadius: 6
     }]
